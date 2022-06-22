@@ -1,0 +1,23 @@
+input TaskInput {
+  content: String!
+  title: String!
+  timestamp: String!
+  view: Int!
+}
+
+type Task {
+  id: ID!
+  content: String!
+  title: String!
+  timestamp: String!
+  views: Int!
+}
+type Query {
+  getTasks: [Task!]!
+  getTaskById(id: ID!): Task
+}
+
+type Mutation {
+  createTask(input: TaskInput!): Task!
+  updateTask(id: ID!, input: TaskInput!): Task!
+}
