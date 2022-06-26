@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"sync"
 	"sync/atomic"
-	"task-managament/graph/model"
+	"task-managament/server/api/graph/model"
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
@@ -240,7 +240,6 @@ var sources = []*ast.Source{
   timestamp: String!
   view: Int!
 }
-
 type Task {
   id: ID!
   content: String!
@@ -252,7 +251,6 @@ type Query {
   getTasks: [Task!]!
   getTaskById(id: ID!): Task
 }
-
 type Mutation {
   createTask(input: TaskInput!): Task!
   updateTask(id: ID!, input: TaskInput!): Task!
@@ -2785,7 +2783,7 @@ func (ec *executionContext) unmarshalInputTaskInput(ctx context.Context, obj int
 			var err error
 
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("view"))
-			it.View, err = ec.unmarshalNInt2int(ctx, v)
+			it.Views, err = ec.unmarshalNInt2int(ctx, v)
 			if err != nil {
 				return it, err
 			}

@@ -207,6 +207,6 @@ func connect(db *sql.DB, dbConfig Config) (*sql.DB, error) {
 	db.SetMaxOpenConns(maxOpenConnections)
 	db.SetMaxIdleConns(maxIdleConnections)
 	db.SetConnMaxLifetime(connMaxLifetime * time.Minute)
-	log.Print(ctx, "connected to database - %s", dbConfig.Database)
+	log.Print(ctx, "connected to database", dbConfig.Database)
 	return db, nil
 }

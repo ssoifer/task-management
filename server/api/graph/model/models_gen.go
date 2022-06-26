@@ -14,5 +14,5 @@ type TaskInput struct {
 	Content   string `json:"content"`
 	Title     string `json:"title"`
 	Timestamp string `json:"timestamp"`
-	View      int    `json:"view"`
+	Views     int    `json:"view"`
 }

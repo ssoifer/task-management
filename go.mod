@@ -7,6 +7,7 @@ require (
 	github.com/dgryski/trifles v0.0.0-20200323201526-dd97f9abfb48
 	github.com/golang-migrate/migrate v3.5.4+incompatible
 	github.com/lib/pq v1.10.6
+	github.com/pkg/errors v0.9.1
 	github.com/vektah/gqlparser/v2 v2.4.5
 )
 
@@ -23,7 +24,6 @@ require (
 	github.com/mitchellh/mapstructure v1.3.1 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.2 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	golang.org/x/net v0.0.0-20220225172249-27dd8689420f // indirect
 	golang.org/x/sys v0.0.0-20220317061510-51cd9980dadf // indirect

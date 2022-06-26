@@ -2,7 +2,7 @@ input TaskInput {
   content: String!
   title: String!
   timestamp: String!
-  view: Int!
+  views: Int!
 }
 
 type Task {

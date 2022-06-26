@@ -2,23 +2,30 @@ package main
 
 import (
 	"context"
+	"github.com/99designs/gqlgen/graphql/handler"
+	"github.com/99designs/gqlgen/graphql/playground"
 	"log"
 	"net/http"
 	"os"
-	"task-managament/graph"
-	"task-managament/graph/generated"
+	"task-managament/server/api/graph/generated"
+	"task-managament/server/api/graph/resolvers"
 	"task-managament/server/commons"
-	"task-managament/server/repositories"
-
-	"github.com/99designs/gqlgen/graphql/handler"
-	"github.com/99designs/gqlgen/graphql/playground"
+	"task-managament/server/repositories/task_management"
+	"task-managament/server/services/task"
 )
 
 const defaultPort = "8080"
 
 func main() {
 
-	_, err := repositories.GetRepository(commons.RepositoryTypeDB)
+	repo, err := taskmanagement.GetRepository(commons.RepositoryTypeDB)
+	taskManagementService := task.New(repo)
+	resolver := resolvers.Resolver{
+		TasksManagementService: taskManagementService,
+	}
+	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &resolver}))
+	http.Handle(commons.EndpointPath, srv)
+
 	ctx := context.Background()
 	if err != nil {
 		log.Fatal(ctx, err, "Unable to get repository")
@@ -28,8 +35,6 @@ func main() {
 	if port == "" {
 		port = defaultPort
 	}
-
-	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)

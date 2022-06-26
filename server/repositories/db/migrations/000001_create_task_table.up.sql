@@ -3,5 +3,5 @@ create table if not exists task(
     "title" varchar,
     "content" varchar,
     "views" int,
-    "timestamp" timestamp default current_timestamp
+    "timestamp" varchar
     );
